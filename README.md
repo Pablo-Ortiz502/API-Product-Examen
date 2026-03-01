@@ -89,6 +89,7 @@ El servidor estará disponible en `http://localhost:3000`
 
 | Método | Ruta                                    | Descripción                     |
 | ------ | --------------------------------------- | ------------------------------- |
+| GET    | `/api/health`                           | Health check                    |
 | GET    | `/api/products`                         | Listar productos con paginación |
 | GET    | `/api/products?page=1&limit=10&q=mouse` | Buscar productos                |
 | GET    | `/api/products/:id`                     | Obtener un producto             |
@@ -123,68 +124,13 @@ El servidor estará disponible en `http://localhost:3000`
 
 ## Cómo importar y usar en Postman
 
-### Opción 1: Importar colección
+### Importar colección
 
 1. Abre **Postman**
 2. Click en **Import** (esquina superior izquierda)
 3. Selecciona el archivo `postman_collection.json` que está en la raíz del proyecto
 4. Click en **Import**
-
-### Opción 2: Configurar manualmente
-
-1. Abre Postman y crea una nueva colección llamada `Products API`
-2. Crea una variable de entorno llamada `base_url` con el valor `http://localhost:3000/api`
-3. Agrega los siguientes requests:
-
-**Listar productos**
-
-```
-GET {{base_url}}/products?page=1&limit=10
-```
-
-**Buscar productos**
-
-```
-GET {{base_url}}/products?q=mouse
-```
-
-**Obtener un producto**
-
-```
-GET {{base_url}}/products/1
-```
-
-**Crear producto**
-
-```
-POST {{base_url}}/products
-Content-Type: application/json
-
-{
-  "name": "Mouse inalámbrico",
-  "description": "Mouse ergonómico RGB",
-  "price": 25.99,
-  "stock": 100
-}
-```
-
-**Actualizar producto**
-
-```
-PUT {{base_url}}/products/1
-Content-Type: application/json
-
-{
-  "price": 19.99,
-  "stock": 80
-}
-```
-
-**Eliminar producto**
-
-```
-DELETE {{base_url}}/products/1
-```
+5. La colección ya tiene configurada la variable `base_url` apuntando a `http://localhost:3000/api`
 
 ---
 
@@ -197,6 +143,8 @@ src/
 │   │   └── http-exception.filter.ts
 │   └── interceptors/
 │       └── response.interceptor.ts
+├── health/
+│   └── health.controller.ts
 ├── prisma/
 │   ├── prisma.module.ts
 │   └── prisma.service.ts
@@ -220,14 +168,13 @@ prisma/
 
 ## Comandos útiles de Prisma
 
-```bash
+````bash
 # Correr migraciones en desarrollo
 npx prisma migrate dev
 
 # Regenerar el cliente
 npx prisma generate
 
-```
 
 ## Comandos de Docker
 
@@ -240,4 +187,4 @@ docker-compose -f Docker_products_db.yml down
 
 # Detener y borrar datos
 docker-compose -f Docker_products_db.yml down -v
-```
+````
