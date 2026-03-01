@@ -43,7 +43,7 @@ export class ProductsController {
     }
 
     @Delete('/:id')
-    @HttpCode(204)
+    @HttpCode(200)
     deleteProduct(@Param('id', ParseIntPipe) id: number) {
         this.logger.log(`DELETE /products/${id}`);
         return this.productService.remove(id);

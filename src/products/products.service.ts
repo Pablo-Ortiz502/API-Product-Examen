@@ -74,14 +74,14 @@ export class ProductsService {
   }
 
   async remove(id: number) {
-  const product = await this.prisma.product.findUnique({ where: { id } });
+    const product = await this.prisma.product.findUnique({ where: { id } });
 
-  if (!product) {
-    
-    this.logger.log(`Producto con id ${id} no encontrado`);
-    throw new NotFoundException(`Producto con id ${id} no encontrado`);
+    if (!product) {
+      throw new NotFoundException(`Producto con id ${id} no encontrado`);
+    }
+
+    await this.prisma.product.delete({ where: { id } });
+
+    return { message: `Producto con id ${id} eliminado correctamente` };
   }
-  this.logger.warn(`Producto con id ${id} ELIMINADO`);
-  return this.prisma.product.delete({ where: { id } });
-}
 }
