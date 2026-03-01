@@ -35,7 +35,7 @@ export class ProductsController {
     @Put('/:id')
     @HttpCode(200)
     updateProduct(
-        @Body() dto: Partial<ProductDto>,
+        @Body() dto: ProductDto,
         @Param('id', ParseIntPipe) id: number,
     ) {
         this.logger.log(`PUT /products/${id} - body: ${JSON.stringify(dto)}`);
