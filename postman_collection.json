@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar productos",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/products?page=1&limit=10"
+      }
+    },
+    {
+      "name": "Buscar productos",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/products?q=mouse"
+      }
+    },
+    {
+      "name": "Obtener producto",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/products/1"
+      }
+    },
+    {
+      "name": "Crear producto",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/products",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Mouse inalámbrico\",\n  \"description\": \"Mouse ergonómico RGB\",\n  \"price\": 25.99,\n  \"stock\": 100\n}"
+        }
+      }
+    },
+    {
+      "name": "Actualizar producto",
+      "request": {
+        "method": "PUT",
+        "url": "{{base_url}}/products/1",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 19.99,\n  \"stock\": 80\n}"
+        }
+      }
+    },
+    {
+      "name": "Eliminar producto",
+      "request": {
+        "method": "DELETE",
+        "url": "{{base_url}}/products/1"
+      }
+    }
+  ]
+}
