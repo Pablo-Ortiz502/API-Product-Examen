@@ -7,10 +7,10 @@ import { ResponseInterceptor } from './common/interceptors/response/response.int
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,      
-    forbidNonWhitelisted: true, 
+    whitelist: true,
+    forbidNonWhitelisted: true,
     transform: true,
   }));
 
@@ -19,6 +19,7 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT') ?? 3000;
-  await app.listen(port);
+
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap();
