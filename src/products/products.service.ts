@@ -60,7 +60,7 @@ export class ProductsService {
   return { message: 'Producto  creado correctamente', product };
 }
 
-  async update(id: number, dto: Partial<ProductDto>) {
+  async update(id: number, dto: ProductDto) {
 
     const product = await this.prisma.product.update({ where: { id }, data: dto })
     if (!product) {

@@ -2,11 +2,11 @@ import { Controller, Get, HttpCode, Logger } from '@nestjs/common';
 
 
 
-@Controller('api/health')
+@Controller('/')
 export class HealthController {
     private readonly logger = new Logger("HealthController");
 
-    @Get()
+    @Get('api/health')
     @HttpCode(200)
     check() {
     this.logger.log('POST /health -- status: up')    

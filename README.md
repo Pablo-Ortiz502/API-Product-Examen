@@ -39,9 +39,9 @@ cp .env.example .env
 Contenido del `.env`:
 
 ```env
-DATABASE_URL="mysql://root:root1234@localhost:5000/products_db"
+DATABASE_URL="mysql://root:root1234@localhost:3307/products_db"
+DB_PORT=3307
 DB_HOST=localhost
-DB_PORT=5000
 DB_USER=root
 DB_PASSWORD=root1234
 DB_NAME=products_db
@@ -52,7 +52,7 @@ PORT=3000
 
 ## Cómo ejecutar
 
-### 1. Levantar la base de datos con Docker
+### 1. Levantar la base de datos y el Backend
 
 ```bash
 docker-compose -f Docker_products_db.yml up -d
@@ -64,21 +64,10 @@ Verifica que el contenedor esté corriendo:
 docker-compose -f Docker_products_db.yml ps
 ```
 
-### 2. Correr las migraciones
+### 2. Verificar logs de Backend
 
 ```bash
-npx prisma migrate dev
-```
-
-### 3. Levantar el servidor
-
-```bash
-# Modo desarrollo
-npm run start:dev
-
-# Modo producción
-npm run build
-npm run start:prod
+docker-compose -f Docker_products_db.yml logs backend
 ```
 
 El servidor estará disponible en `http://localhost:3000`
@@ -166,28 +155,18 @@ prisma/
 
 ---
 
-## Comandos útiles de Prisma
-
-````bash
-# Correr migraciones en desarrollo
-npx prisma migrate dev
-
-# Regenerar el cliente
-npx prisma generate
-
-
 ## Comandos de Docker
 
 ```bash
 # Levantar base de datos
 docker-compose -f Docker_products_db.yml up -d
 
-# Detener base de datos
+# Detener ejecucion
 docker-compose -f Docker_products_db.yml down
 
 # Detener y borrar datos
 docker-compose -f Docker_products_db.yml down -v
-````
+```
 
 ## Script SQL
 
